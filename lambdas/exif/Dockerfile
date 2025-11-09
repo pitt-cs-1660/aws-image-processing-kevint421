@@ -5,7 +5,7 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 COPY pyproject.toml ${LAMBDA_TASK_ROOT}
 
-RUN uv sync --system --no-dev
+RUN uv pip install --system .
 
 COPY handler.py ${LAMBDA_TASK_ROOT}
 
