@@ -46,11 +46,12 @@ def greyscale_handler(event, context):
 
                     print(f"Processing: s3://{bucket_name}/{object_key}")
 
-                    ######
-                    #
-                    #  TODO: add greyscale lambda code here
-                    #
-                    ######
+                    image = download_from_s3(bucket_name, object_key)
+                    greyscale_image = image.convert('L')
+
+                    filename = Path(object_key).name
+                    output_key = f"processed/greyscale/{filename}"
+                    upload_to_s3(bucket_name, output_key, greyscale_image)
 
                     processed_count += 1
 
